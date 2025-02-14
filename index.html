@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown a Capodanno</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('capodanno.jpg'); /* Cambia con il tuo file */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            text-align: center;
+            color: #fff;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            backdrop-filter: blur(5px);
+        }
+
+        h1 {
+            font-size: 50px;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
+            margin-bottom: 20px;
+        }
+
+        #countdown {
+            font-size: 40px;
+            font-weight: bold;
+            display: flex;
+            gap: 15px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+        }
+
+        .time-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            background: rgba(255, 215, 0, 0.5);
+            border-radius: 10px;
+            min-width: 80px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .num {
+            font-size: 50px;
+            font-weight: bold;
+            color: #ffcc00;
+        }
+
+        .label {
+            font-size: 18px;
+            text-transform: uppercase;
+            color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Countdown a Capodanno 🎉</h1>
+    <div id="countdown">
+        <div class="time-box"><span class="num" id="days">0</span><span class="label">Giorni</span></div>
+        <div class="time-box"><span class="num" id="hours">0</span><span class="label">Ore</span></div>
+        <div class="time-box"><span class="num" id="minutes">0</span><span class="label">Minuti</span></div>
+        <div class="time-box"><span class="num" id="seconds">0</span><span class="label">Secondi</span></div>
+    </div>
+
+    <script>
+        var nextYear = new Date().getFullYear() + 1;
+        var countDownDate = new Date("Jan 1, " + nextYear + " 00:00:00").getTime();
+
+        function updateCountdown() {
+            var now = new Date().getTime();
+            var distance = countDownDate - now;
+
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").textContent = days;
+            document.getElementById("hours").textContent = hours;
+            document.getElementById("minutes").textContent = minutes;
+            document.getElementById("seconds").textContent = seconds;
+
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdown").innerHTML = "<h2>Buon Anno Nuovo! 🎆🥂</h2>";
+            }
+        }
+        
+        var x = setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
